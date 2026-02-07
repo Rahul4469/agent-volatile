@@ -171,7 +171,7 @@ class MessageModel(BaseModel):
         )               
 
 class StateSnapshot(BaseModel):
-    """ a snapshot of the agent state for apu responses.
+    """ a snapshot of the agent state for api responses.
     this is what is returned to clients.    
     """
     messages: list[MessageModel] = Field(description="Conversation history")
