@@ -65,7 +65,7 @@ class SafeEvaluator(ast.NodeVisitor):
         """Visit a number literal (Python 3.7 style)."""
         return float(node.n)
     
-    def visit_Constant(self, nod: ast.Constant) -> float:
+    def visit_Constant(self, node: ast.Constant) -> float:
         """Visit a constant (Python 3.8+ style)."""
         if isinstance(node.value, (int, float)):
             return float(node.value)

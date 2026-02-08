@@ -10,7 +10,9 @@ from research_agent.core.exceptions import ToolError
 # PYDANTIC MODELS FOR TOOL INPUTS----------------------------------------------
 
 class SearchInput(BaseModel):
-    """Input schema for search tools."""
+    """Input schema for search tools.
+    query:str, max_results:int.
+    """
     query: str = Field(description="The search query to execute",
                        min_lenght=1,
                        max_length=500)
@@ -51,10 +53,10 @@ class ResearchTool(BaseTool, ABC):
     
     # LANGCHAIN INTERFACE IMPLEMENTATION
     
-    # synchronous, but will need async _execute()
+    # synchronous, but has async _execute()
     def _run(self, *args: Any, 
-             run_manager: CallbackManagerForToolRun | None = None,
-             **kwargs: Any) -> str:
+    run_manager: CallbackManagerForToolRun | None = None,
+    **kwargs: Any) -> str:
         import asyncio
         try:
             loop = asyncio.get_running_loop()                                # 1. Check: "Are we in async context?"
@@ -68,7 +70,7 @@ class ResearchTool(BaseTool, ABC):
             return asyncio.run(self._execute(**kwargs))   
     
     async def _arun(self, *args: Any, run_manager: CallbackManagerForToolRun | None = None,
-                    **kwargs: Any) -> str:
+    **kwargs: Any) -> str:
         try:
             return await self._execute(**kwargs)
         except ToolError: 
@@ -76,7 +78,7 @@ class ResearchTool(BaseTool, ABC):
             raise 
         except Exception as e:
             # Wrap unexpected errors
-            raise TooError(
+            raise ToolError(
                 message=str(e),
                 tool_name=self.name,
                 tool_args=kwargs,
@@ -128,7 +130,7 @@ def format_tool_result(result: Any, max_length: int = 5000) -> str:
         
     # Truncate if too long
     if len(text) > max_length:
-        text = text[:max_lenght] + "\n... (truncate)"
+        text = text[:max_length] + "\n... (truncate)"
         
     return text     
 

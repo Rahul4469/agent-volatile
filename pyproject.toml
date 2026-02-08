@@ -68,8 +68,12 @@ ignore = [
     "B008",   # Function call in default argument (needed for Depends())
 ]
 
+# RUFF
+
 [tool.ruff.lint.isort]
 known-first-party = ["research_agent"]
+[tool.ruff.lint]
+ignore = ["W293"]
 
 
 # PYTEST

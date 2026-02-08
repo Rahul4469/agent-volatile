@@ -207,7 +207,7 @@ class ResearchState(AgentState):
 
 def create_research_state(query: str, depth: str = "normal", context: dict[str, Any] | None = None) -> ResearchState:
     base_context = context or {}
-    base_conetxt["research_depth"] = depth
+    base_context["research_depth"] = depth
     
     return ResearchState(
         messages=[HumanMessage(content=query)],
