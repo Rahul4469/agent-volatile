@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git fsck:*)",
+      "Bash(git gc:*)",
+      "Bash(git show-ref:*)",
+      "Bash(git update-ref:*)"
+    ]
+  }
+}

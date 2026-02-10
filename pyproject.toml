@@ -66,14 +66,14 @@ select = [
 ignore = [
     "E501",   # Line too long
     "B008",   # Function call in default argument (needed for Depends())
+    "W293",   # Whitespace on blank line
+    "W291",   # Trailing whitespace
+    "W292",   # Trailing whitespace
+    "UP037",  # Remove quotes from type annotation
 ]
-
-# RUFF
 
 [tool.ruff.lint.isort]
 known-first-party = ["research_agent"]
-[tool.ruff.lint]
-ignore = ["W293"]
 
 
 # PYTEST

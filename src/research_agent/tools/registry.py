@@ -67,7 +67,7 @@ class ToolRegistry:
     def get(self, name: str) -> BaseTool:
         """get tool by name"""
         tool = self._tools.get(name)
-        if tools is None:
+        if tool is None:
             raise ToolNotFoundError(name, available_tools=list(self._tools.keys()))
         return tool
     
@@ -77,7 +77,7 @@ class ToolRegistry:
            return list[self._tools.values()]
         
         return [
-            tool for name, tools in self._tools.items()
+            tool for name, tool in self._tools.items()
             if name not in self._disabled
         ] 
     

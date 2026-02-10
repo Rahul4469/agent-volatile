@@ -51,7 +51,7 @@ class Event:
     type: EventType
     data: dict[str, Any] = field(default_factory=dict)  # default_factory: Fresh dict per instance
     timestamp: datetime = field(default_factory=datetime.utcnow)
-    event_id: str = field(default_factory=lambda: str(uuid()))   
+    event_id: str = field(default_factory=lambda: str(uuid4()))   
     thread_id: str = ""
     run_id: str = ""
     
@@ -139,7 +139,8 @@ class EventEmitter:
         self._subscribers.append(queue)
         return queue   
     
-    async def emit(self, event_type: EventType, data: dict[str, Any] | None = None) -> Event:
+    async def emit(self, event_type: EventType, 
+                   data: dict[str, Any] | None = None) -> Event:
         """ Emit an event to all subs"""
         if self._closed:
             return Event(type=event_type) # No-op if closed

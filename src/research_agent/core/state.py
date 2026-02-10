@@ -53,6 +53,16 @@ class NodeType(str, Enum):
 from typing import TypedDict
 
 class AgentState(TypedDict):
+    """
+    properties:
+    - messages
+    - context
+    - status
+    - current_node
+    - iteration
+    - error
+    - final_answer
+    """
     
     # Annotated: Wraps a base type + extra metadata
     # add_messages: LangGraph's built-in reducer function, merges old state + new update → new state.

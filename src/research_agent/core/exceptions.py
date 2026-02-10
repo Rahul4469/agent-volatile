@@ -2,7 +2,7 @@ from typing import Any
 
 # BASE EXCEPTIONS --------------------------------------
 
-class ResearchAgentError(Exceptions):
+class ResearchAgentError(Exception):
     """Base exceptions for all research agent errors.
     All custom exceptions inherit from this
     ```python
@@ -69,7 +69,7 @@ class ToolTimeoutError(ToolError):
         
 # LLM ERRORS ---------------------------------------------------------
               
-class LLMErrors(ResearchAgentError):
+class LLMError(ResearchAgentError):
     def __init__(self, message: str, model: str | None = None,
                  status_code: int | None = None,
                  cause: Exception | None = None,) -> None:
